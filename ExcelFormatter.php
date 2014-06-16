@@ -35,6 +35,7 @@ class ExcelFormatter extends CFormatter
 	public $booleanFormat=array('0','1');
 
     public $typeMap = array(
+        'integer' => array('type'=>'Integer', 'format'=>'\#\ \#\#0'),
         'number' => array('type'=>'Number', 'format'=>'\#\ \#\#0,00'),
         'date' => array('type'=>'DateTime', 'format'=>'yyyy\-mm\-dd'),
         'time' => array('type'=>'DateTime', 'format'=>'hh:mm:ss'),

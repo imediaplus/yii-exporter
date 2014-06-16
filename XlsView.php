@@ -39,7 +39,7 @@ class XlsView extends ExporterView
 
 		foreach($this->columns as $column) {
             
-            if (isset($column->type) && !is_array($column->type) && isset($this->_typeMap[$column->type])) {
+            if (isset($column->type) && !is_array($column->type) && isset($this->_typeMap[$column->type]) && ($this->_typeMap[$column->type]['format'] !== null)) {
                 $type = $this->_typeMap[$column->type]['type'];
                 $style = $column->type.'Format';
                 /*if ($column instanceof CDataColumn) {
@@ -57,12 +57,15 @@ class XlsView extends ExporterView
                 $style = null;
             }
             $value = $column->getDataCellContent($row);
-
+            
 			if ($this->stripTags)
 				$value = strip_tags($value);
 			if ($this->encoding !== null)
 				$value = iconv('UTF-8', $this->encoding, $value);
-			$values[] = '<Cell'.($style!==null ? ' ss:StyleID="'.$style.'"' : '').'><Data ss:Type="'.$type.'">' . $this->encodeText($value) . '</Data></Cell>';
+
+            //trim all whitespaces including non breaking - \xc2\xa0
+            $v = trim($this->encodeText($value), " \t\n\r\0\x0b\xc2\xa0");
+			$values[] = '<Cell'.($style!==null ? ' ss:StyleID="'.$style.'"' : '').'><Data ss:Type="'.$type.'">' . $v . '</Data></Cell>';
 		}
 		return $values;
 	}
