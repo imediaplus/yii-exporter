@@ -65,6 +65,10 @@ class XlsView extends ExporterView
 
             //trim all whitespaces including non breaking - \xc2\xa0
             $v = trim($this->encodeText($value), " \t\n\r\0\x0b\xc2\xa0");
+            if ($v === '') {
+                $type = 'String';
+                $style = null;
+            }
 			$values[] = '<Cell'.($style!==null ? ' ss:StyleID="'.$style.'"' : '').'><Data ss:Type="'.$type.'">' . $v . '</Data></Cell>';
 		}
 		return $values;
