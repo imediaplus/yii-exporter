@@ -122,7 +122,7 @@ XML;
 
     public function renderColumnHeaders()
     {
-		echo '<Row ss:StyleID="Heading" ss:Height="1.3">';
+		echo '<Row ss:StyleID="Heading">';
 		foreach($this->getHeader() as $header) {
             echo '<Cell><Data ss:Type="String">' . $this->encodeText($header) . '</Data></Cell>';
 		}
