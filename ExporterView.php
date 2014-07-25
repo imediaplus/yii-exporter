@@ -86,7 +86,7 @@ abstract class ExporterView extends CGridView
 			while (ob_get_level()) ob_end_clean();
 		if (!$this->disableHttpHeaders) {
             if($this->mimetype) {
-                header('Content-Type: '.$this->mimetype);
+                header('Content-Type: '.$this->mimetype.'; charset='.($this->encoding === null ? 'utf-8' : $this->encoding));
             }
 
             if($this->filename !== null && strlen($this->filename) > 0) {
