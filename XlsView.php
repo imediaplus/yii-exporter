@@ -124,6 +124,7 @@ XML;
     {
 		echo '<Row ss:StyleID="Heading">';
 		foreach($this->getHeader() as $header) {
+            $header = preg_replace('/<br\s*\/?>/i', " ", $header);
             echo '<Cell><Data ss:Type="String">' . $this->encodeText($header) . '</Data></Cell>';
 		}
         echo '</Row>';
