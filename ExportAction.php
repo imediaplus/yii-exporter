@@ -14,7 +14,7 @@ class ExportAction extends CAction {
 	public $widget;
 
 	public function run() {
-		if ($this->controller->checkAccessInActions && !Yii::app()->user->checkAccess('read '.$this->controller->authModelClass)) {
+		if ($this->controller->checkAccessInActions && !Yii::app()->user->checkAccess($this->controller->authModelClass.'.read')) {
 			throw new CHttpException(403,Yii::t('yii','You are not authorized to perform this action.'));
 		}
 
