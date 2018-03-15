@@ -1,6 +1,8 @@
 <?php
 namespace nineinchnick;
 
+use CFormatter;
+
 /**
  * ExcelFormatter extends CFormatter to use formats recognized by Microsoft Excel and other compatible spreadsheet software.
  *

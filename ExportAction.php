@@ -1,6 +1,8 @@
 <?php
 namespace nineinchnick;
 
+use CAction;
+
 class ExportAction extends CAction {
 	/**
 	 * @var array CGridView columns definition

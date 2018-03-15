@@ -1,6 +1,9 @@
 <?php
 namespace nineinchnick;
 
+use Yii;
+use CGridView;
+
 /**
  * ExporterView class file.
  *
