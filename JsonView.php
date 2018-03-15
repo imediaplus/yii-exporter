@@ -1,4 +1,6 @@
 <?php
+namespace nineinchnick;
+
 /**
  * JsonView class file.
  *

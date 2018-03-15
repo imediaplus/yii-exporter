@@ -1,4 +1,5 @@
 <?php
+namespace nineinchnick;
 
 class XlsView extends ExporterView
 {
@@ -16,7 +17,7 @@ class XlsView extends ExporterView
 	public function init()
 	{
 		parent::init();
-        
+
         if ($this->worksheetName === null) {
             $this->worksheetName = basename($this->filename, '.xls');
         }
@@ -38,7 +39,7 @@ class XlsView extends ExporterView
 		$values = array();
 
 		foreach($this->columns as $column) {
-            
+
             if (isset($column->type) && !is_array($column->type) && isset($this->_typeMap[$column->type]) && ($this->_typeMap[$column->type]['format'] !== null)) {
                 $type = $this->_typeMap[$column->type]['type'];
                 $style = $column->type.'Format';
@@ -57,7 +58,7 @@ class XlsView extends ExporterView
                 $style = null;
             }
             $value = $column->getDataCellContent($row);
-            
+
 			if ($this->stripTags)
 				$value = strip_tags($value);
 			if ($this->encoding !== null)
@@ -174,7 +175,7 @@ XML;
 </Workbook>
 XML;
 	}
-    
+
     protected function encodeText($text) {
         // this may not have any sense, encode what we just decoded
         // but input may contain HTML and some of the entities are (not) valid in XML

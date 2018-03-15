@@ -1,4 +1,5 @@
 <?php
+namespace nineinchnick;
 
 /**
  * CActiveFinder implements eager loading and lazy loading of related active records.

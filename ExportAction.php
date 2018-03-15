@@ -1,4 +1,5 @@
 <?php
+namespace nineinchnick;
 
 class ExportAction extends CAction {
 	/**
@@ -56,9 +57,9 @@ class ExportAction extends CAction {
 					$this->criteria->addNotInCondition('"t".'.$model->tableSchema->primaryKey, $pks);
 				}
 			}
-            
+
 			$this->widget['dataProvider'] = $model->search($_GET, $this->criteria, $this->widget['columns'], null, false);
-            
+
             $filterModel = $filterForm->getModel();
             $filterModel->format(null, true);
             $this->widget['filter'] = $filterModel;

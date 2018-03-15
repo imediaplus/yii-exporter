@@ -1,4 +1,6 @@
 <?php
+namespace nineinchnick;
+
 /**
  * ExporterView class file.
  *
@@ -254,7 +256,7 @@ abstract class ExporterView extends CGridView
     /**
 	 * @param integer $row the row number (zero-based).
 	 * @param array $data result of CDbDataReader.read() or an item from the CDataProvider.data array
-     * @param CActiveFinder $finder 
+     * @param CActiveFinder $finder
      * @param boolean $isActiveDataProvider
      * @param boolean $isStreaming true when CDataReader is used instead of CDataProvider.data
 	 * @return mixed a model or array
