@@ -3,6 +3,10 @@ namespace nineinchnick;
 
 use Yii;
 use CGridView;
+use CActiveDataProvider;
+use CException;
+use CDbDataReader;
+use IDataProvider;
 
 /**
  * ExporterView class file.
