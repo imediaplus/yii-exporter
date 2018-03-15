@@ -6,6 +6,7 @@ use CGridView;
 use CActiveDataProvider;
 use CException;
 use CDbDataReader;
+use CHtml;
 use IDataProvider;
 
 /**
@@ -288,7 +289,28 @@ abstract class ExporterView extends CGridView
 		$values = array();
 
 		foreach($this->columns as $column) {
-			$value = $column->getDataCellContent($row);
+            // hack pentru versiunile vechi de yii
+            if (method_exists($column, 'getDataCellContent')) {  
+                // yii >= 1.1.16
+                $value = $column->getDataCellContent($row);
+            } else {
+                // yii < 1.1.16
+                $data = $column->grid->dataProvider->data[$row];
+                $value = null;
+
+                if($column->value!==null) {
+                    $value = $column->evaluateExpression($column->value, array('data' => $data,'row' => $row));
+                } elseif ($column->name!==null) {
+                    $value = CHtml::value($data,$column->name);
+                }
+
+                if ($value === null) {
+                    $value = $column->grid->nullDisplay;
+                } else {
+                    $value = $column->grid->getFormatter()->format($value, $column->type);
+                }
+            }
+
 			if ($this->stripTags)
 				$value = strip_tags($value);
             if($this->decodeHtmlEntities)

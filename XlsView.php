@@ -1,6 +1,8 @@
 <?php
 namespace nineinchnick;
 
+use CHtml;
+
 class XlsView extends ExporterView
 {
     /**
@@ -57,7 +59,28 @@ class XlsView extends ExporterView
                 $type = 'String';
                 $style = null;
             }
-            $value = $column->getDataCellContent($row);
+
+            // hack pentru versiunile vechi de yii
+            if (method_exists($column, 'getDataCellContent')) {  
+                // yii >= 1.1.16
+                $value = $column->getDataCellContent($row);
+            } else {
+                // yii < 1.1.16
+                $data = $column->grid->dataProvider->data[$row];
+                $value = null;
+
+                if($column->value!==null) {
+                    $value = $column->evaluateExpression($column->value, array('data' => $data,'row' => $row));
+                } elseif ($column->name!==null) {
+                    $value = CHtml::value($data,$column->name);
+                }
+
+                if ($value === null) {
+                    $value = $column->grid->nullDisplay;
+                } else {
+                    $value = $column->grid->getFormatter()->format($value, $column->type);
+                }
+            }
 
 			if ($this->stripTags)
 				$value = strip_tags($value);
@@ -184,6 +207,8 @@ XML;
         if(is_array($text)) {
             $text = implode(';', $text);
         }
-        return htmlentities(html_entity_decode($text), ENT_XML1 | ENT_NOQUOTES);
+        // imediafix: adaugat encoding-ul
+        // care este diferit intre versiunile de php
+        return htmlentities(html_entity_decode($text), ENT_XML1 | ENT_NOQUOTES, 'utf-8');
     }
 }
