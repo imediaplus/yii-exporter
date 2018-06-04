@@ -209,6 +209,6 @@ XML;
         }
         // imediafix: adaugat encoding-ul
         // care este diferit intre versiunile de php
-        return htmlentities(html_entity_decode($text), ENT_XML1 | ENT_NOQUOTES, 'utf-8');
+        return htmlentities(html_entity_decode($text, null, 'utf-8'), ENT_XML1 | ENT_NOQUOTES, 'utf-8');
     }
 }
