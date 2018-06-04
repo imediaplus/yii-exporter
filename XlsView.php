@@ -204,8 +204,18 @@ XML;
         if(is_array($text)) {
             $text = implode(';', $text);
         }
+        
+        // imediafix: ajustat nbsp la spatiu.
+        // in versiunile vechi de php (<5.4)
+        // ENT_XML1 nu este definit
+        // si encodarea ca si XML rezulta nbsp care nu este valid 
+        // pentru documente excel
+        if (! defined('ENT_XML1')) {
+            $text = str_replace('&nbsp;', ' ', $text);
+        }
+        
         // imediafix: adaugat encoding-ul
-        // care este diferit intre versiunile de php
+        // care este diferit intre versiunile de php        
         return htmlentities(html_entity_decode($text, null, 'utf-8'), ENT_XML1 | ENT_NOQUOTES, 'utf-8');
     }
 }
