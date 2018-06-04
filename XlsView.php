@@ -191,9 +191,6 @@ XML;
 	{
         echo <<<XML
         </Table>
-        <c:WorksheetOptions>
-            <c:DisplayCustomHeaders/>
-        </c:WorksheetOptions>
     </Worksheet>
 </Workbook>
 XML;
